@@ -58,16 +58,6 @@ class PurchaseRequest extends AbstractRequest
 
         return $fields;
     }
-    
-    public function getLanguage()
-    {
-        return $this->getParameter('language');
-    }
-    
-    public function setLanguage($value)
-    {
-        return $this->setParameter('language', $value);
-    }
 
     public function sendData($data)
     {

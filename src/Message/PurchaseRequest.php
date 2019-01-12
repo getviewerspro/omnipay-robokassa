@@ -19,7 +19,7 @@ class PurchaseRequest extends AbstractRequest
         );
 
         return [
-            'InvId' => $this->getInvId(),
+            'InvId' => $this->getTransactionId(),
             'MrchLogin' => $this->getPurse(),
             'OutSum' => $this->getAmount(),
             'InvDesc' => $this->getDescription(),
@@ -28,7 +28,7 @@ class PurchaseRequest extends AbstractRequest
             'Culture' => $this->getLanguage(),
             'IsTest' => (int)$this->getTestMode(),
             'Email' => $this->getEmail(),
-        ] + $this->getCustomFields();
+        ];
     }
 
     public function generateSignature()
@@ -40,23 +40,7 @@ class PurchaseRequest extends AbstractRequest
             $this->getSecretKey()
         ];
 
-        foreach ($this->getCustomFields() as $field => $value) {
-            $params[] = "$field=$value";
-        }
-
         return md5(implode(':', $params));
-    }
-
-    public function getCustomFields()
-    {
-        $fields = array_filter([
-            'Shp_TransactionId' => $this->getTransactionId(),
-            'Shp_Currency' => $this->getCurrency()
-        ]);
-
-        ksort($fields);
-
-        return $fields;
     }
 
     public function sendData($data)

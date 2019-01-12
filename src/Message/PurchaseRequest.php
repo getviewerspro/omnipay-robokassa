@@ -36,7 +36,7 @@ class PurchaseRequest extends AbstractRequest
         $params = [
             $this->getPurse(),
             $this->getAmount(),
-            $this->getInvId(),
+            $this->getTransactionId(),
             $this->getSecretKey()
         ];
 

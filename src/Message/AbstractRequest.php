@@ -64,18 +64,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     /**
      * @return string
      */
-    public function getClient()
+    public function getEmail()
     {
-        return $this->getParameter('client');
+        return $this->getParameter('email');
     }
 
     /**
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setClient($value)
+    public function setEmail($value)
     {
-        return $this->setParameter('client', $value);
+        return $this->setParameter('email', $value);
     }
 
     /**

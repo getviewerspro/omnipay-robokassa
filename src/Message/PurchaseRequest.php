@@ -22,10 +22,12 @@ class PurchaseRequest extends AbstractRequest
             'InvId' => $this->getInvId(),
             'MrchLogin' => $this->getPurse(),
             'OutSum' => $this->getAmount(),
-            'Desc' => $this->getDescription(),
+            'InvDesc' => $this->getDescription(),
             'IncCurrLabel' => $this->getCurrency(),
             'SignatureValue' => $this->generateSignature(),
+            'Culture' => $this->getLanguage(),
             'IsTest' => (int)$this->getTestMode(),
+            'Email' => $this->getEmail(),
         ] + $this->getCustomFields();
     }
 
@@ -49,13 +51,22 @@ class PurchaseRequest extends AbstractRequest
     {
         $fields = array_filter([
             'Shp_TransactionId' => $this->getTransactionId(),
-            'Shp_Client' => $this->getClient(),
             'Shp_Currency' => $this->getCurrency()
         ]);
 
         ksort($fields);
 
         return $fields;
+    }
+    
+    public function getLanguage()
+    {
+        return $this->getParameter('language');
+    }
+    
+    public function setLanguage($value)
+    {
+        return $this->setParameter('language', $value);
     }
 
     public function sendData($data)

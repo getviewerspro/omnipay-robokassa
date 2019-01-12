@@ -20,28 +20,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     /**
      * Get the purse.
      *
-     * @return integer invid
-     */
-    public function getInvId()
-    {
-        return $this->getParameter('invid');
-    }
-
-    /**
-     * Set the purse.
-     *
-     * @param integer $invid invid
-     *
-     * @return self
-     */
-    public function setInvId($value)
-    {
-        return $this->setParameter('invid', $value);
-    }
-
-    /**
-     * Get the purse.
-     *
      * @return string purse
      */
     public function getPurse()
@@ -76,6 +54,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     public function setEmail($value)
     {
         return $this->setParameter('email', $value);
+    }
+   
+    public function getLanguage()
+    {
+        return $this->getParameter('language');
+    }
+    
+    public function setLanguage($value)
+    {
+        return $this->setParameter('language', $value);
     }
 
     /**
@@ -120,16 +108,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     public function setSecretKey2($value)
     {
         return $this->setParameter('secretKey2', $value);
-    }
-   
-    public function getLanguage()
-    {
-        return $this->getParameter('language');
-    }
-    
-    public function setLanguage($value)
-    {
-        return $this->setParameter('language', $value);
     }
 
 }

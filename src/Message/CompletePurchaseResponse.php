@@ -53,6 +53,11 @@ class CompletePurchaseResponse extends AbstractResponse
         return $this->data['OutSum'];
     }
 
+    public function getMoney()
+    {
+        return NULL;
+    }
+
     public function getTransactionId()
     {
         return $this->data['InvId'];

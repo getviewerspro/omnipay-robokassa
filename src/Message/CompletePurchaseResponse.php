@@ -86,7 +86,7 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function getTransactionId()
     {
-        return $this->data['Shp_TransactionId'];
+        return $this->data['InvId'];
     }
 
     public function getCurrency()

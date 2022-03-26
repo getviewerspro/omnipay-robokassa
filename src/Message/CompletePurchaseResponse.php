@@ -40,12 +40,33 @@ class CompletePurchaseResponse extends AbstractResponse
             $this->request->getSecretKey2()
         ];
 
+        foreach ($this->getCustomFields() as $field => $value) {
+            $params[] = "$field=$value";
+        }
+
         return md5(implode(':', $params));
+    }
+
+    public function getCustomFields()
+    {
+        $fields = array_filter([
+            'Shp_Currency' => $this->getCurrency(),
+            'Shp_TransactionId' => $this->getTransactionId(),
+        ]);
+
+        ksort($fields);
+
+        return $fields;
     }
 
     public function getSignatureValue()
     {
         return $this->data['SignatureValue'];
+    }
+
+    public function getClient()
+    {
+        return $this->data['Shp_Client'];
     }
 
     public function getAmount()
@@ -58,9 +79,19 @@ class CompletePurchaseResponse extends AbstractResponse
         return NULL;
     }
 
+    public function getPayer()
+    {
+        return $this->data['PaymentMethod'];
+    }
+
     public function getTransactionId()
     {
-        return $this->data['InvId'];
+        return $this->data['Shp_TransactionId'];
+    }
+
+    public function getCurrency()
+    {
+        return $this->data['Shp_Currency'];
     }
 
     public function getTransactionReference()

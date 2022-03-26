@@ -1,5 +1,5 @@
 {
-    "name": "hiqdev/omnipay-robokassa",
+    "name": "getviewerspro/omnipay-robokassa",
     "type": "library",
     "description": "RoboKassa driver for Omnipay PHP payment library",
     "keywords": [

@@ -27,6 +27,7 @@ class PurchaseRequest extends AbstractRequest
             'OutSumCurrency' => $this->getCurrency(),
             'SignatureValue' => $this->generateSignature(),
             'IsTest' => (int)$this->getTestMode(),
+            'Receipt' => $this->getReceipt(),
             'Email' => $this->getEmail(),
             'Culture' => $this->getLanguage(),
         ] + $this->getCustomFields();
@@ -51,7 +52,12 @@ class PurchaseRequest extends AbstractRequest
             $params[] = "$field=$value";
         }
 
-        return md5(implode(':', $params));
+        $hash = md5(implode(':', $params));
+
+        info($params);
+        info($hash);
+
+        return $hash;
     }
 
     public function getCustomFields()

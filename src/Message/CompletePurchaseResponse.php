@@ -26,7 +26,6 @@ class CompletePurchaseResponse extends AbstractResponse
     {
         $this->request = $request;
         $this->data    = $data;
-        info($data);
 
         if (strtolower($this->getSignatureValue(false)) !== $this->generateSignature()) {
             if (strtolower($this->getSignatureValue(true) !== $this->generateSignature())) {

@@ -120,14 +120,24 @@ class Gateway extends AbstractGateway
         return $this->setParameter('email', $value);
     }
     
+    public function setLanguage($value)
+    {
+        return $this->setParameter('language', $value);
+    }
+    
     public function getLanguage()
     {
         return $this->getParameter('language');
     }
     
-    public function setLanguage($value)
+    public function setReceipt($value)
     {
-        return $this->setParameter('language', $value);
+        return $this->setParameter('receipt', $value);
+    }
+    
+    public function getReceipt()
+    {
+        return $this->getParameter('receipt');
     }
     
     /**

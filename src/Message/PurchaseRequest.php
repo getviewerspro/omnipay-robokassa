@@ -45,7 +45,6 @@ class PurchaseRequest extends AbstractRequest
             $this->getInvId()
         ];
         
-        $params[] = $this->getCurrency();
         if ($this->getCurrency()) {
             $params[] = $this->getCurrency();
         }

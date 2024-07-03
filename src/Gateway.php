@@ -135,7 +135,7 @@ class Gateway extends AbstractGateway
         return $this->getParameter('receipt');
     }
 
-    public function setReceipt(array $value)
+    public function setReceipt($value)
     {
         return $this->setParameter('receipt', $value);
     }

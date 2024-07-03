@@ -130,14 +130,14 @@ class Gateway extends AbstractGateway
         return $this->getParameter('language');
     }
     
-    public function setReceipt($value)
-    {
-        return $this->setParameter('receipt', $value);
-    }
-    
     public function getReceipt()
     {
         return $this->getParameter('receipt');
+    }
+
+    public function setReceipt(array $value)
+    {
+        return $this->setParameter('receipt', $value);
     }
     
     /**

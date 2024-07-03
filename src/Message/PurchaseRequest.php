@@ -20,15 +20,16 @@ class PurchaseRequest extends AbstractRequest
 
         return [
             'InvId' => $this->getTransactionId(),
-            'MrchLogin' => $this->getPurse(),
+            'MerchantLogin' => $this->getPurse(),
             'OutSum' => $this->getAmount(),
-            'InvDesc' => $this->getDescription(),
+            'Description' => $this->getDescription(),
             'IncCurrLabel' => $this->getCurrency(),
+            'OutSumCurrency' => $this->getCurrency(),
             'SignatureValue' => $this->generateSignature(),
-            'Culture' => $this->getLanguage(),
             'IsTest' => (int)$this->getTestMode(),
             'Email' => $this->getEmail(),
-        ];
+            'Culture' => $this->getLanguage(),
+        ] + $this->getCustomFields();
     }
 
     public function generateSignature()
@@ -36,11 +37,33 @@ class PurchaseRequest extends AbstractRequest
         $params = [
             $this->getPurse(),
             $this->getAmount(),
-            $this->getTransactionId(),
-            $this->getSecretKey()
+            $this->getInvId()
         ];
+        if ($this->getCurrency()) {
+            $params[] = $this->getCurrency();
+        }
+        if ($this->getReceipt()) {
+            $params[] = $this->getReceipt();
+        }
+        $params[] = $this->getSecretKey();
+
+        foreach ($this->getCustomFields() as $field => $value) {
+            $params[] = "$field=$value";
+        }
 
         return md5(implode(':', $params));
+    }
+
+    public function getCustomFields()
+    {
+        $fields = array_filter([
+            'Shp_TransactionId' => $this->getTransactionId(),
+            'Shp_Client' => $this->getClient()
+        ]);
+
+        ksort($fields);
+
+        return $fields;
     }
 
     public function sendData($data)

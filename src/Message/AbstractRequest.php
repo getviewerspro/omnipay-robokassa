@@ -18,6 +18,32 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     protected $zeroAmountAllowed = false;
 
     /**
+     * Get the InvId
+     *
+     * @return integer invid. Defaults to 0 (zero)
+     */
+    public function getInvId()
+    {
+        return $this->getParameter('InvId') ?? 0;
+    }
+
+    /**
+     * Set the InvId value.
+     *
+     * @param integer $invid invid
+     *
+     * @return self
+     */
+    public function setInvId($value)
+    {
+        if (!is_numeric($value)) {
+            throw new InvalidRequestException('Property InvId must be numeric');
+        }
+
+        return $this->setParameter('InvId', $value);
+    }
+
+    /**
      * Get the purse.
      *
      * @return string purse
@@ -42,28 +68,64 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     /**
      * @return string
      */
-    public function getEmail()
+    public function getClient()
     {
-        return $this->getParameter('email');
+        return $this->getParameter('client');
     }
 
     /**
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setEmail($value)
+    public function setClient($value)
     {
-        return $this->setParameter('email', $value);
+        return $this->setParameter('client', $value);
     }
-   
-    public function getLanguage()
+
+    /**
+     * @return string
+     */
+    public function getReceipt()
     {
-        return $this->getParameter('language');
+        return rawurlencode($this->getParameter('receipt') ?? '');
     }
-    
-    public function setLanguage($value)
+
+    /**
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function setReceipt($value)
     {
-        return $this->setParameter('language', $value);
+        return $this->setParameter('receipt', $value);
+    }
+
+    public function getCurrency()
+    {
+        $currency = $this->getParameter('currency');
+        if ($currency === 'RUB') {
+            return '';
+        }
+        
+        return $currency;
+    }
+
+    /**
+     * Get the payment currency label.
+     *
+     * @return string
+     */
+    public function getCurrencyLabel()
+    {
+        return $this->getParameter('currencyLabel');
+    }
+
+    /**
+     * @param string $value
+     * @return AbstractRequest
+     */
+    public function setCurrencyLabel($value)
+    {
+        return $this->setParameter('currencyLabel', $value);
     }
 
     /**
@@ -108,6 +170,33 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     public function setSecretKey2($value)
     {
         return $this->setParameter('secretKey2', $value);
+    }
+    
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->getParameter('email');
+    }
+
+    /**
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function setEmail($value)
+    {
+        return $this->setParameter('email', $value);
+    }
+   
+    public function getLanguage()
+    {
+        return $this->getParameter('language');
+    }
+    
+    public function setLanguage($value)
+    {
+        return $this->setParameter('language', $value);
     }
 
 }

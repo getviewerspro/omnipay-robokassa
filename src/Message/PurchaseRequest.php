@@ -40,6 +40,8 @@ class PurchaseRequest extends AbstractRequest
             $this->getAmount(),
             $this->getInvId()
         ];
+        
+        $params[] = $this->getCurrency();
         if ($this->getCurrency()) {
             $params[] = $this->getCurrency();
         }
@@ -55,6 +57,7 @@ class PurchaseRequest extends AbstractRequest
         $hash = md5(implode(':', $params));
 
         info($params);
+        info($this->getData());
         info($hash);
 
         return $hash;

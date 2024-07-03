@@ -18,7 +18,7 @@ class PurchaseRequest extends AbstractRequest
             'purse', 'amount', 'currency', 'description'
         );
 
-        return [
+        $data = [
             'InvId' => $this->getTransactionId(),
             'MerchantLogin' => $this->getPurse(),
             'OutSum' => $this->getAmount(),
@@ -31,6 +31,10 @@ class PurchaseRequest extends AbstractRequest
             'Email' => $this->getEmail(),
             'Culture' => $this->getLanguage(),
         ] + $this->getCustomFields();
+
+        info($data);
+        
+        return $data;
     }
 
     public function generateSignature()
@@ -57,7 +61,6 @@ class PurchaseRequest extends AbstractRequest
         $hash = md5(implode(':', $params));
 
         info($params);
-        info($this->getData());
         info($hash);
 
         return $hash;

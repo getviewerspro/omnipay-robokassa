@@ -54,7 +54,7 @@ class CompletePurchaseResponse extends AbstractResponse
     {
       $fields = array_filter([
             'Shp_TransactionId' => $this->getTransactionId(),
-            'Shp_Client' => $this->getClient(),
+            //'Shp_Client' => $this->getClient(),
             'Shp_Currency' => $includeCurrency ? $this->getCurrency() : null,
         ]);
 
@@ -70,12 +70,17 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function getClient()
     {
-        return $this->data['Shp_Client'];
+        //return $this->data['Shp_Client'];
     }
 
     public function getAmount()
     {
         return $this->data['OutSum'];
+    }
+    
+    public function getFee()
+    {
+        return $this->data['Fee'];
     }
 
     public function getPayer()
@@ -115,6 +120,6 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function getMoney()
     {
-        return NULL;
+        return ((float)$this->getAmount() - (float)$this->getFee()).' RUB';
     }
 }

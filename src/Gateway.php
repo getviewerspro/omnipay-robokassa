@@ -139,6 +139,16 @@ class Gateway extends AbstractGateway
     {
         return $this->setParameter('receipt', $value);
     }
+
+    public function setCurrency($value)
+    {
+        return $this->setParameter('currency', $value);
+    }
+    
+    public function getCurrency()
+    {
+        return $this->getParameter('currency');
+    }
     
     /**
      * @param array $parameters

@@ -69,7 +69,7 @@ class CompletePurchaseResponse extends AbstractResponse
 
     public function getClient()
     {
-        //return $this->data['Shp_Client'];
+        //return $this->data['Shp_Client']; 
     }
 
     public function getAmount()
